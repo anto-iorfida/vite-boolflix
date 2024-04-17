@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js';
 import SingleCard from './SingleCard.vue'
 
     export default {
@@ -8,7 +9,7 @@ import SingleCard from './SingleCard.vue'
         },
         data(){
                 return{
-
+                    store
                 }
             } 
         }
@@ -16,8 +17,8 @@ import SingleCard from './SingleCard.vue'
 
 <template>
 <section>
-    <div class="container">
-        <SingleCard></SingleCard>
+    <div class="container d-flex">
+        <SingleCard v-for="card in store.resultSearch" :cardInfo="card"></SingleCard>
     </div>
 </section>
 </template>
@@ -26,7 +27,8 @@ import SingleCard from './SingleCard.vue'
 section{
 
     .container{
-
+        flex-wrap: wrap;
+        overflow: hidden;
         
     }
 }
