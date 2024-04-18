@@ -2,6 +2,7 @@
 import { store } from '../store.js';
 import SingleCard from './SingleCard.vue'
 
+
     export default {
         name: "AppSectionCard",
         components:{
@@ -17,6 +18,7 @@ import SingleCard from './SingleCard.vue'
 
 <template>
 <section>
+
     <div class="container d-flex">
         <SingleCard v-for="card in store.resultSearch" :cardInfo="card"></SingleCard>
     </div>
@@ -26,10 +28,15 @@ import SingleCard from './SingleCard.vue'
 
 <style lang="scss" scoped>
 section{
+    height: 100vh;
     
-    .container{
+    background: linear-gradient(90deg, rgba(2,0,36,1) 23%, rgba(72,13,113,1) 59%, rgba(0,0,0,1) 100%);
+        .container{
         flex-wrap: wrap;
         overflow: hidden;
+        height: 100%;
+        padding: 10px;
+
         
     }
 }

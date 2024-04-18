@@ -3,12 +3,14 @@ import axios from 'axios';
 import { store } from './store.js';
 import AppHeader from './components/AppHeader.vue'
 import AppSectionCard from './components/AppSectionCard.vue'
+import NextPage from './components/NextPage.vue'
 
 export default {
   components: {
     store,
     AppHeader,
-    AppSectionCard
+    AppSectionCard,
+    NextPage
     
     
   },
@@ -25,7 +27,7 @@ export default {
 
       // parameters to add to the api
       const queryParams= { };
-
+      // queryParams.page = store.nextPage;
       // condition if user chooses film or serie-----------------
       if(store.seachTipology === 'film') {
         apiUrl += 'movie?api_key=d6c825e90dc40d1f4796f3344ccacfc5';
@@ -35,16 +37,23 @@ export default {
       apiUrl += 'tv?api_key=d6c825e90dc40d1f4796f3344ccacfc5';
         queryParams.query = store.nameFilm
       }
+
       // condition if user chooses language----------------------
       if(store.searchLanguage !== ''){
         queryParams.language = store.searchLanguage
       }
+
       // condition if user chooses vote----------------------
       if(store.searchVote !== ''){
         queryParams.vote_average.gte = store.searchVote
       }
 
-console.log(queryParams.query);
+      // next Page-----------------------------------------
+      if(store.nextPage !== 1){
+        queryParams.page = store.nextPage
+      }
+
+console.log('titolo input:',queryParams.query);
 
       // call api
       axios.get(apiUrl, {
@@ -52,8 +61,9 @@ console.log(queryParams.query);
       })
       .then((response) => {
         store.resultSearch = response.data.results;
-        console.log(response);
-        console.log(store.resultSearch);
+        store.changePage = response.data;
+        console.log('oggetto del api',response);
+        console.log('variabile cambio pagina:',store.changePage);
         
         
       });
@@ -70,11 +80,13 @@ console.log(queryParams.query);
   <AppHeader @searchFilm="getFilmFromApi"></AppHeader>
 
   <main>
+    <NextPage @nextPage="getFilmFromApi"></NextPage>
     <AppSectionCard></AppSectionCard>
   </main>
 </template>
 
 <style lang="scss">
 @use './style/generic';
+
 
 </style>
