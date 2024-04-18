@@ -76,6 +76,9 @@ import { store } from '../store.js';
 <style lang="scss" scoped>
 header{
     padding: 20px;
+    background-color: #2b2e38;
+    color: white;
+    z-index: 10;
     .container{
         nav{
             .menu-input{
@@ -83,6 +86,7 @@ header{
                 background-color: rgba(0, 0, 0, 0.8);
                 flex-wrap: wrap;
                 flex-direction: column;
+                z-index: 10;
                 *{
                     margin: 10px;
                 }
@@ -91,6 +95,9 @@ header{
                 }
                 select{
                     padding: 6px;
+                    img{
+                        width: 10px
+                    }
                 }
                 button{
                     padding: 4px;
