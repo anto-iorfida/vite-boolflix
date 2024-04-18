@@ -15,7 +15,18 @@ import { store } from '../store.js';
                 // function to have original language film as img
                 getImageUrl(name) {
                 return new URL(`../assets/img/${name}.png`, import.meta.url).href;
-            }
+                },
+                gerGenerateVoteStar(){
+                    let stars = [];
+
+                    let numStars = Math.floor(this.cardInfo.vote_average.toFixed(1) / 2);
+
+                    for (let i = 0; i < numStars; i++) {
+                        stars.push('<i class="fa-solid fa-star star"></i>');
+                    }
+
+                    return stars.join('');
+                }
             },
             mounted (){
                 this.getImageUrl(name)
@@ -34,7 +45,8 @@ import { store } from '../store.js';
             <div class="back">
                 <p>Titolo: {{ this.cardInfo.title && this.cardInfo.title.length > 0 ? this.cardInfo.title : this.cardInfo.name }}</p>
                 <p>Data uscita: {{ this.cardInfo.release_date && this.cardInfo.release_date.length > 0 ? this.cardInfo.release_date :this.cardInfo.first_air_date }}</p>
-                <p>Vote: {{ this.cardInfo.vote_average.toFixed(1) }}</p>
+                <p>Vote:<span v-html="gerGenerateVoteStar()"></span></p>
+                
                 <!-- <img src="../assets/img/it.png" alt=""> -->
                 <img :src="getImageUrl(this.cardInfo.original_language)" alt="">
             </div>
@@ -74,7 +86,6 @@ import { store } from '../store.js';
             height: 100%;
             width: 100%;
             padding:0 6px;
-            text-align: center;
             backface-visibility: hidden; 
             color: grey;
             font-size: x-small;
@@ -82,6 +93,9 @@ import { store } from '../store.js';
             top: 0;
             right: 0;
             transform: rotateY(180deg);
+            span{
+                width: 20px;
+            }
             img{
                 max-width: 20px;
                 max-height: 20px;
@@ -90,7 +104,7 @@ import { store } from '../store.js';
                 left: 0;
             }
             *{
-                margin: 10px;
+                margin: 6px;
             }
         }
 
