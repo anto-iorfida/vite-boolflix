@@ -57,6 +57,7 @@ import { store } from '../store.js';
 .card{
         width: calc((100% / 4) - 10px );
         min-height: 100px;
+        height: 30%;
         margin: 5px;
         transform-style: preserve-3d;
         transition: transform 1s;
@@ -73,11 +74,11 @@ import { store } from '../store.js';
             p{
                 margin-top: 20px;  
             }
-        }
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover
+            }
         }
 
 

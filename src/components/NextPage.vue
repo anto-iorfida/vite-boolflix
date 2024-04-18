@@ -16,6 +16,12 @@ import axios from 'axios';
                 console.log(nextPage);
                 
             },
+            getPreviousPage(nextPage){
+                nextPage --;
+                store.nextPage = nextPage;
+                console.log(nextPage);
+                
+            },
             getLog(popo){
                 console.log(popo);
             }
@@ -28,7 +34,7 @@ import axios from 'axios';
 
 <template>
     <div class="d-flex justify-center">
-        <div class="previous">
+        <div class="previous" @click="getPreviousPage(store.nextPage) , $emit('nextPage')">
             -
         </div>
         <div class="current">
