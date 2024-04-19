@@ -12,6 +12,12 @@ export const store = reactive({
     searchVote :'',
     // intup search name film/serie
     nameFilm :'',
+    // total resul 
+    totResult:'',
+    // total pages
+    totPages:'',
+    // all pages
     changePage:[],
+    // when the variable increases, the page changes
     nextPage: 1
 });

@@ -28,13 +28,18 @@ export default {
       // parameters to add to the api
       const queryParams= { };
       // queryParams.page = store.nextPage;
-      // condition if user chooses film or serie-----------------
+      // condition if user chooses film or serie or all-----------------
+
       if(store.seachTipology === 'film') {
         apiUrl += 'movie?api_key=d6c825e90dc40d1f4796f3344ccacfc5';
         queryParams.query = store.nameFilm
 
       }else if (store.seachTipology === 'serie'){
-      apiUrl += 'tv?api_key=d6c825e90dc40d1f4796f3344ccacfc5';
+        apiUrl += 'tv?api_key=d6c825e90dc40d1f4796f3344ccacfc5';
+        queryParams.query = store.nameFilm
+
+      }else if (store.seachTipology === '') {
+        apiUrl += 'multi?api_key=d6c825e90dc40d1f4796f3344ccacfc5';
         queryParams.query = store.nameFilm
       }
 
@@ -62,8 +67,13 @@ console.log('titolo input:',queryParams.query);
       .then((response) => {
         store.resultSearch = response.data.results;
         store.changePage = response.data;
-        console.log('oggetto del api',response);
-        console.log('variabile cambio pagina:',store.changePage);
+        store.totResult = response.data.total_results
+        store.totPages = response.data.total_pages
+        // console.log('oggetto del api',response);
+        // console.log('tot pagine',response.data.total_pages);
+        // console.log('tot risultati',response.data.total_results);
+        // console.log('variabile cambio pagina:',store.changePage);
+        console.log('risultato ricerca',response.data);
         
         
       });

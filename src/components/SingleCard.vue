@@ -46,11 +46,15 @@ import { store } from '../store.js';
                 <p>Titolo: {{ this.cardInfo.title && this.cardInfo.title.length > 0 ? this.cardInfo.title : this.cardInfo.name }}</p>
                 <p>Data uscita: {{ this.cardInfo.release_date && this.cardInfo.release_date.length > 0 ? this.cardInfo.release_date :this.cardInfo.first_air_date }}</p>
                 <p>Vote:<span v-html="gerGenerateVoteStar()"></span></p>
+                <div class="description">
+                    <p>{{ this.cardInfo.overview }}</p>
+                </div>
+                
                 
                 <!-- <img src="../assets/img/it.png" alt=""> -->
                 <img :src="getImageUrl(this.cardInfo.original_language)" alt="">
             </div>
-        </div>
+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -89,7 +93,7 @@ import { store } from '../store.js';
             padding:0 6px;
             backface-visibility: hidden; 
             color: grey;
-            font-size: x-small;
+            font-size: small;
             position: absolute;
             top: 0;
             right: 0;
@@ -106,6 +110,10 @@ import { store } from '../store.js';
             }
             *{
                 margin: 6px;
+            }
+            .description{
+                height: 50%;
+                overflow-y: auto;
             }
         }
 
